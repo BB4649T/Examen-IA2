@@ -1,0 +1,335 @@
+📋 Documentation - Dashboard Météo ETL
+🏗️ Architecture du Projet
+Vue d'ensemble
+
+Le dashboard météo est un système complet d'analyse et de visualisation de données météorologiques collectées via un pipeline ETL automatisé avec Apache Airflow.
+
+┌─────────────────┐    ┌──────────────┐    ┌─────────────────┐
+│   OpenWeather   │───▶│   Airflow    │───▶│   Streamlit     │
+│      API        │    │   Pipeline   │    │   Dashboard     │
+└─────────────────┘    └──────────────┘    └─────────────────┘
+
+📦 Installation et Prérequis
+Dépendances Python
+
+pip install streamlit pandas plotly numpy datetime
+
+Structure des fichiers
+
+projet_meteo/
+├── dashboard.py              # Application Streamlit principale
+├── weather_data_sample.csv   # Données météo (générées par Airflow)
+├── requirements.txt          # Dépendances
+└── README.md                # Documentation
+
+Lancement
+
+streamlit run dashboard.py
+
+📊 Format des Données
+Structure CSV Attendue
+
+city,country,lat,lon,date,timestamp,temperature,feels_like,humidity,pressure,wind_speed,wind_direction,cloudiness,visibility,weather_main,aqi,pm2_5,pm10,co,no2,o3,comfort_score,season,aqi_category
+
+Description des Colonnes
+Colonne 	Type 	Description 	Unité
+city 	String 	Nom de la ville 	-
+country 	String 	Code pays (ISO 2) 	-
+lat 	Float 	Latitude 	Degrés
+lon 	Float 	Longitude 	Degrés
+date 	DateTime 	Date de l'observation 	YYYY-MM-DD
+timestamp 	DateTime 	Horodatage précis 	ISO 8601
+temperature 	Float 	Température 	°C
+feels_like 	Float 	Température ressentie 	°C
+humidity 	Float 	Humidité relative 	%
+pressure 	Float 	Pression atmosphérique 	hPa
+wind_speed 	Float 	Vitesse du vent 	m/s
+wind_direction 	Float 	Direction du vent 	Degrés
+cloudiness 	Float 	Couverture nuageuse 	%
+visibility 	Float 	Visibilité 	km
+weather_main 	String 	Condition météo principale 	-
+aqi 	Float 	Indice qualité de l'air 	0-5
+pm2_5 	Float 	Particules PM2.5 	μg/m³
+pm10 	Float 	Particules PM10 	μg/m³
+co 	Float 	Monoxyde de carbone 	μg/m³
+no2 	Float 	Dioxyde d'azote 	μg/m³
+o3 	Float 	Ozone 	μg/m³
+comfort_score 	Float 	Score de confort 	0-20
+season 	String 	Saison 	Été/Automne/Hiver/Printemps
+aqi_category 	String 	Catégorie AQI 	Bon/Modéré/Mauvais/etc.
+🎯 Fonctionnalités du Dashboard
+1. Filtres Interactifs
+
+    Sélection de villes : Multiselect avec toutes les villes disponibles
+    Plage de dates : Sélecteur de période avec limites automatiques
+    Mise à jour en temps réel : Recalcul automatique des métriques
+
+2. Indicateurs Clés (KPIs)
+
+# Métriques calculées
+- Température moyenne avec delta
+- Humidité moyenne avec delta
+- Indice qualité air avec delta
+- Score confort avec delta
+
+3. Visualisations Principales
+Graphiques Temporels
+
+    Évolution température : Courbes par ville
+    Évolution humidité : Tendances temporelles
+    Graphiques interactifs : Zoom, pan, sélection
+
+Qualité de l'Air
+
+    AQI par ville : Graphique en barres coloré
+    Distribution AQI : Graphique en secteurs
+    Heatmap polluants : Matrice de concentrations
+
+Analyse Radar
+
+    Profil polluants : Vue multidimensionnelle
+    Sélection ville : Analyse personnalisée
+    Échelle adaptative : Normalisation automatique
+
+4. Analyse de Stabilité Météorologique 🎯
+Algorithme de Calcul
+
+def calculate_stability_score(city_data):
+    # Calcul des écarts-types
+    stability_factors = {
+        'temperature': city_data['temperature'].std(),
+        'humidity': city_data['humidity'].std(),
+        'pressure': city_data['pressure'].std(),
+        'wind_speed': city_data['wind_speed'].std(),
+        'aqi': city_data['aqi'].std()
+    }
+
+    # Normalisation (0-100)
+    normalized_scores = {}
+    for factor, std_val in stability_factors.items():
+        normalized_scores[factor] = max(0, 100 - (std_val * 10))
+
+    # Score pondéré
+    weights = {
+        'temperature': 0.3,    # 30%
+        'humidity': 0.2,       # 20%
+        'pressure': 0.2,       # 20%
+        'wind_speed': 0.15,    # 15%
+        'aqi': 0.15           # 15%
+    }
+
+    global_score = sum(normalized_scores[factor] * weights[factor]
+                      for factor in normalized_scores)
+
+    return global_score
+
+Interprétation des Scores
+
+    80-100 : Excellente stabilité ✅
+    60-79 : Bonne stabilité ⚠️
+    0-59 : Stabilité modérée 🚨
+
+Affichage Résultats
+
+    Podium : Top 3 des villes stables
+    Tableau détaillé : Scores par critère
+    Graphique radar : Profil de la ville la plus stable
+    Recommandations : Conseils basés sur le score
+
+🔧 Configuration Avancée
+Personnalisation des Seuils
+
+# Dans le code, modifiez ces valeurs
+STABILITY_THRESHOLDS = {
+    'excellent': 80,
+    'good': 60,
+    'moderate': 40
+}
+
+# Poids des critères de stabilité
+STABILITY_WEIGHTS = {
+    'temperature': 0.3,
+    'humidity': 0.2,
+    'pressure': 0.2,
+    'wind_speed': 0.15,
+    'aqi': 0.15
+}
+
+Ajout de Nouvelles Métriques
+
+# Exemple : Ajout d'un indice de confort thermique
+def calculate_comfort_index(temp, humidity, wind):
+    # Formule personnalisée
+    comfort = (temp * 0.6) + (humidity * 0.3) + (wind * 0.1)
+    return comfort
+
+🚀 Pipeline ETL Airflow
+DAG Structure
+
+# Exemple de DAG Airflow
+from airflow import DAG
+from airflow.operators.python import PythonOperator
+
+dag = DAG(
+    'weather_etl',
+    schedule_interval='@daily',
+    catchup=False
+)
+
+extract_task = PythonOperator(
+    task_id='extract_weather_data',
+    python_callable=extract_from_openweather,
+    dag=dag
+)
+
+transform_task = PythonOperator(
+    task_id='transform_data',
+    python_callable=clean_and_transform,
+    dag=dag
+)
+
+load_task = PythonOperator(
+    task_id='load_to_csv',
+    python_callable=save_to_csv,
+    dag=dag
+)
+
+extract_task >> transform_task >> load_task
+
+Monitoring Pipeline
+
+Le dashboard affiche automatiquement :
+
+    ✅ État des tâches
+    📊 Nombre d'enregistrements
+    🕒 Dernière mise à jour
+    🌍 Villes surveillées
+
+📈 Métriques et Analyses
+Corrélations Automatiques
+
+# Matrice de corrélation calculée automatiquement
+numeric_columns = [
+    'temperature', 'humidity', 'pressure',
+    'wind_speed', 'aqi', 'comfort_score'
+]
+correlation_matrix = df[numeric_columns].corr()
+
+Statistiques Descriptives
+
+    Moyenne, médiane, écart-type
+    Quartiles et percentiles
+    Min/Max par période
+    Tendances temporelles
+
+🎨 Interface Utilisateur
+Layout Responsive
+
+# Configuration de page
+st.set_page_config(
+    page_title="Dashboard Météo",
+    page_icon="🌦️",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
+Sidebar Filtres
+
+    Multiselect villes : Sélection multiple
+    Date range : Période personnalisée
+    État temps réel : Mise à jour automatique
+
+Colonnes Adaptatives
+
+# Disposition responsive
+col1, col2 = st.columns(2)
+col1, col2, col3, col4 = st.columns(4)
+
+🔍 Dépannage
+Erreurs Communes
+Fichier CSV manquant
+
+⚠️ Fichier weather_data_sample.csv non trouvé
+
+Solution : Vérifiez que le fichier existe dans le répertoire
+Erreur de format de date
+
+ValueError: time data doesn't match format
+
+Solution : Vérifiez le format des colonnes date/timestamp
+Données insuffisantes
+
+⚠️ Données insuffisantes pour calculer les scores
+
+Solution : Minimum 2 points de données par ville requis
+Logs et Debug
+
+# Ajoutez ces lignes pour debug
+import logging
+logging.basicConfig(level=logging.INFO)
+
+# Dans le code
+st.write("Debug info:", df.info())
+st.write("Colonnes disponibles:", df.columns.tolist())
+
+🔄 Maintenance et Évolution
+Mise à Jour des Données
+
+    Automatique : Via pipeline Airflow
+    Manuelle : Remplacement du fichier CSV
+    Cache : Rechargement automatique avec @st.cache_data
+
+Ajout de Nouvelles Villes
+
+# Dans le pipeline ETL
+new_cities = ['Londres', 'Tokyo', 'Sydney']
+for city in new_cities:
+    weather_data = get_weather_data(city)
+    df = pd.concat([df, weather_data])
+
+Optimisation Performances
+
+# Cache des calculs lourds
+@st.cache_data
+def calculate_heavy_metrics(df):
+    # Calculs complexes
+    return results
+
+📞 Support et Contact
+FAQ
+
+Q: Comment ajouter une nouvelle métrique ? R: Modifiez la fonction calculate_stability_score() et ajoutez la colonne dans le CSV
+
+Q: Peut-on changer les seuils de stabilité ? R: Oui, modifiez les constantes STABILITY_THRESHOLDS dans le code
+
+Q: Comment exporter les données ? R: Utilisez le bouton "Télécharger CSV" dans l'interface
+Versions
+
+    v1.0 : Dashboard de base
+    v1.1 : Ajout analyse de stabilité
+    v1.2 : Améliorations UI/UX
+
+🏆 Exemple d'Utilisation
+Cas d'Usage Typique
+
+# 1. Lancement du dashboard
+streamlit run dashboard.py
+
+# 2. Sélection des villes d'intérêt
+selected_cities = ['Paris', 'London', 'Berlin']
+
+# 3. Filtrage par période
+date_range = ('2025-01-01', '2025-06-30')
+
+# 4. Analyse de stabilité
+# → Le dashboard identifie automatiquement la ville la plus stable
+# → Affiche le score et les recommandations
+
+Résultat Attendu
+
+🏆 VILLE LA PLUS STABLE: Paris
+📊 Score: 85.3/100
+✅ Excellente stabilité météorologique
+🎯 Idéale pour activités extérieures planifiées
+
+Cette documentation est mise à jour avec chaque version du dashboard. Pour les questions spécifiques, consultez les commentaires dans le code source.

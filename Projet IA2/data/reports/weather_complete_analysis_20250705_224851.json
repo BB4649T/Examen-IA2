@@ -1,0 +1,350 @@
+{
+  "timestamp": "2025-07-05T22:48:51.785838",
+  "basic_statistics": {
+    "period": "2025-06-05 00:00:00 \u00e0 2025-07-04 00:00:00",
+    "total_observations": 300,
+    "cities_count": 10,
+    "countries_count": 10,
+    "descriptive_stats": {
+      "temperature": {
+        "mean": 18.023,
+        "std": 6.37985733372324,
+        "min": -0.2,
+        "max": 32.7
+      },
+      "humidity": {
+        "mean": 68.74199999999999,
+        "std": 13.659946919105357,
+        "min": 28.3,
+        "max": 95.0
+      },
+      "pressure": {
+        "mean": 1012.4170000000001,
+        "std": 15.759208520013223,
+        "min": 974.3,
+        "max": 1051.1
+      },
+      "wind_speed": {
+        "mean": 5.748333333333333,
+        "std": 4.0188224230216365,
+        "min": 0.4,
+        "max": 29.4
+      },
+      "aqi": {
+        "mean": 2.380666666666667,
+        "std": 0.7757354190423077,
+        "min": 1.0,
+        "max": 4.8
+      },
+      "pm2_5": {
+        "mean": 35.016666666666666,
+        "std": 23.897446489488132,
+        "min": 5.0,
+        "max": 157.6
+      },
+      "comfort_score": {
+        "mean": 16.522666666666666,
+        "std": 6.608641162569471,
+        "min": -2.6,
+        "max": 31.59
+      }
+    }
+  },
+  "city_comparison": {
+    "city_means": {
+      "temperature": {
+        "Cairo": 25.23,
+        "Cape Town": 15.17,
+        "London": 12.39,
+        "Moscow": 11.33,
+        "Mumbai": 27.91,
+        "New York": 17.61,
+        "Paris": 14.4,
+        "Rio de Janeiro": 21.98,
+        "Sydney": 15.2,
+        "Tokyo": 19.01
+      },
+      "humidity": {
+        "Cairo": 44.86,
+        "Cape Town": 73.05,
+        "London": 75.75,
+        "Moscow": 71.25,
+        "Mumbai": 78.24,
+        "New York": 66.63,
+        "Paris": 70.51,
+        "Rio de Janeiro": 78.79,
+        "Sydney": 62.84,
+        "Tokyo": 65.5
+      },
+      "pressure": {
+        "Cairo": 1013.82,
+        "Cape Town": 1008.07,
+        "London": 1015.76,
+        "Moscow": 1013.38,
+        "Mumbai": 1015.35,
+        "New York": 1012.59,
+        "Paris": 1009.3,
+        "Rio de Janeiro": 1009.11,
+        "Sydney": 1012.12,
+        "Tokyo": 1014.66
+      },
+      "wind_speed": {
+        "Cairo": 5.6,
+        "Cape Town": 6.93,
+        "London": 5.93,
+        "Moscow": 4.81,
+        "Mumbai": 5.89,
+        "New York": 4.87,
+        "Paris": 6.63,
+        "Rio de Janeiro": 5.96,
+        "Sydney": 5.32,
+        "Tokyo": 5.54
+      },
+      "aqi": {
+        "Cairo": 3.2,
+        "Cape Town": 1.94,
+        "London": 1.84,
+        "Moscow": 2.34,
+        "Mumbai": 3.78,
+        "New York": 2.18,
+        "Paris": 2.23,
+        "Rio de Janeiro": 2.61,
+        "Sydney": 1.51,
+        "Tokyo": 2.18
+      },
+      "pm2_5": {
+        "Cairo": 46.13,
+        "Cape Town": 29.11,
+        "London": 24.8,
+        "Moscow": 33.0,
+        "Mumbai": 48.49,
+        "New York": 35.73,
+        "Paris": 36.03,
+        "Rio de Janeiro": 45.5,
+        "Sydney": 19.14,
+        "Tokyo": 32.24
+      },
+      "comfort_score": {
+        "Cairo": 23.64,
+        "Cape Town": 13.27,
+        "London": 10.59,
+        "Moscow": 9.9,
+        "Mumbai": 26.8,
+        "New York": 16.37,
+        "Paris": 12.62,
+        "Rio de Janeiro": 20.57,
+        "Sydney": 13.85,
+        "Tokyo": 17.61
+      }
+    },
+    "rankings": {
+      "hottest_cities": {
+        "Mumbai": 27.91,
+        "Cairo": 25.23,
+        "Rio de Janeiro": 21.98,
+        "Tokyo": 19.01,
+        "New York": 17.61
+      },
+      "windiest_cities": {
+        "Cape Town": 6.93,
+        "Paris": 6.63,
+        "Rio de Janeiro": 5.96,
+        "London": 5.93,
+        "Mumbai": 5.89
+      },
+      "best_air_quality": {
+        "Sydney": 1.51,
+        "London": 1.84,
+        "Cape Town": 1.94,
+        "New York": 2.18,
+        "Tokyo": 2.18
+      },
+      "most_comfortable": {
+        "Mumbai": 26.8,
+        "Cairo": 23.64,
+        "Rio de Janeiro": 20.57,
+        "Tokyo": 17.61,
+        "New York": 16.37
+      },
+      "most_stable": {
+        "Mumbai": 2.739208711985286,
+        "Rio de Janeiro": 2.78155046484973,
+        "London": 3.016933054854095,
+        "Sydney": 3.121392630545377,
+        "Tokyo": 3.4884769261624493
+      }
+    }
+  },
+  "weather_patterns": {
+    "weather_distribution": {
+      "Clear": 94,
+      "Clouds": 83,
+      "Rain": 67,
+      "Mist": 26,
+      "Thunderstorm": 17,
+      "Snow": 13
+    },
+    "seasonal_temperatures": {
+      "Cairo": {
+        "Hiver": NaN,
+        "\u00c9t\u00e9": 25.23
+      },
+      "Cape Town": {
+        "Hiver": 15.17,
+        "\u00c9t\u00e9": NaN
+      },
+      "London": {
+        "Hiver": NaN,
+        "\u00c9t\u00e9": 12.386666666666667
+      },
+      "Moscow": {
+        "Hiver": NaN,
+        "\u00c9t\u00e9": 11.33
+      },
+      "Mumbai": {
+        "Hiver": NaN,
+        "\u00c9t\u00e9": 27.913333333333334
+      },
+      "New York": {
+        "Hiver": NaN,
+        "\u00c9t\u00e9": 17.61
+      },
+      "Paris": {
+        "Hiver": NaN,
+        "\u00c9t\u00e9": 14.403333333333334
+      },
+      "Rio de Janeiro": {
+        "Hiver": 21.976666666666667,
+        "\u00c9t\u00e9": NaN
+      },
+      "Sydney": {
+        "Hiver": 15.196666666666665,
+        "\u00c9t\u00e9": NaN
+      },
+      "Tokyo": {
+        "Hiver": NaN,
+        "\u00c9t\u00e9": 19.013333333333332
+      }
+    }
+  },
+  "air_quality": {
+    "aqi_distribution": {
+      "Mod\u00e9r\u00e9": 139,
+      "Bon": 95,
+      "Mauvais": 44,
+      "Excellent": 11,
+      "Tr\u00e8s mauvais": 11
+    },
+    "city_air_quality": {
+      "aqi": {
+        "Cairo": 3.2,
+        "Cape Town": 1.94,
+        "London": 1.84,
+        "Moscow": 2.34,
+        "Mumbai": 3.78,
+        "New York": 2.18,
+        "Paris": 2.23,
+        "Rio de Janeiro": 2.61,
+        "Sydney": 1.51,
+        "Tokyo": 2.18
+      },
+      "pm2_5": {
+        "Cairo": 46.13,
+        "Cape Town": 29.11,
+        "London": 24.8,
+        "Moscow": 33.0,
+        "Mumbai": 48.49,
+        "New York": 35.73,
+        "Paris": 36.03,
+        "Rio de Janeiro": 45.5,
+        "Sydney": 19.14,
+        "Tokyo": 32.24
+      },
+      "pm10": {
+        "Cairo": 77.97,
+        "Cape Town": 47.85,
+        "London": 41.96,
+        "Moscow": 55.38,
+        "Mumbai": 70.84,
+        "New York": 56.63,
+        "Paris": 61.06,
+        "Rio de Janeiro": 71.66,
+        "Sydney": 31.27,
+        "Tokyo": 49.65
+      }
+    }
+  },
+  "insights": {
+    "hottest_city": {
+      "city": "Mumbai",
+      "temperature": 27.913333333333334
+    },
+    "coldest_city": {
+      "city": "Moscow",
+      "temperature": 11.33
+    },
+    "best_air_quality": {
+      "city": "Sydney",
+      "aqi": 1.5133333333333332
+    },
+    "worst_air_quality": {
+      "city": "Mumbai",
+      "aqi": 3.783333333333333
+    },
+    "most_comfortable": {
+      "city": "Mumbai",
+      "score": 26.801666666666666
+    },
+    "most_stable": {
+      "city": "Mumbai",
+      "std": 2.739208711985286
+    },
+    "dominant_weather": "Clear"
+  },
+  "visualization_file": "data/reports/weather_visualizations_20250705_224848.png",
+  "data_quality": {
+    "total_records": 300,
+    "missing_values": {
+      "city": 0,
+      "country": 0,
+      "lat": 0,
+      "lon": 0,
+      "date": 0,
+      "timestamp": 0,
+      "temperature": 0,
+      "feels_like": 0,
+      "humidity": 0,
+      "pressure": 0,
+      "wind_speed": 0,
+      "wind_direction": 0,
+      "cloudiness": 0,
+      "visibility": 0,
+      "weather_main": 0,
+      "aqi": 0,
+      "pm2_5": 0,
+      "pm10": 0,
+      "co": 0,
+      "no2": 0,
+      "o3": 0,
+      "comfort_score": 0,
+      "season": 0,
+      "temp_category": 0,
+      "humidity_category": 0,
+      "aqi_category": 0,
+      "temp_ma_7": 0,
+      "humidity_ma_7": 0
+    },
+    "cities_analyzed": [
+      "Cairo",
+      "Cape Town",
+      "London",
+      "Moscow",
+      "Mumbai",
+      "New York",
+      "Paris",
+      "Rio de Janeiro",
+      "Sydney",
+      "Tokyo"
+    ]
+  }
+}
